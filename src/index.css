@@ -1,1 +1,43 @@
 @import 'tailwindcss';
+/*@config "../tailwind.config.js";*/
+
+@theme {
+  /* --- Palette 1: Arctic Professional (Default) --- */
+  --color-v-bg: #f8fafc;
+  --color-v-surface: rgba(255, 255, 255, 0.7);
+  --color-v-accent: #0ea5e9;
+  --color-v-accent-glow: rgba(14, 165, 233, 0.2);
+  --color-v-text-main: #0f172a;
+  --color-v-text-body: #475569;
+  --color-v-matte: #64748b;
+
+  /* --- Palette 2: Soft Prism (Optional override) --- */
+  /* --color-v-bg: #f1f5f9;
+  --color-v-accent: #8b5cf6; */
+
+  /* --- Custom "Vantage" Elevation & Shadows --- */
+  --shadow-v-glass: 0 10px 25px rgba(0, 0, 0, 0.03);
+  --shadow-v-skeuo: inset 0 1px 0 rgba(255, 255, 255, 1);
+
+  /* --- Custom Radii --- */
+  --radius-v-card: 0.75rem;
+}
+
+/* --- Custom Vantage Utilities --- */
+@utility v-glass {
+  background-color: var(--color-v-surface);
+  backdrop-filter: blur(16px);
+  border: 0.5px solid rgba(255, 255, 255, 0.4);
+  box-shadow: var(--shadow-v-glass), var(--shadow-v-skeuo);
+}
+
+@utility v-hologram {
+  border: 1px solid var(--color-v-accent);
+  box-shadow: 0 0 15px var(--color-v-accent-glow);
+  transition: all 0.3s ease-in-out;
+}
+
+@utility v-matte-icon {
+  color: var(--color-v-matte);
+  filter: grayscale(0.2) contrast(0.8);
+}
