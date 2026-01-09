@@ -62,14 +62,13 @@ export default function FileInput(props: {
                     fallback={
                         <AiOutlinePlus/>
                     }>
-                    <image
-                        class={'aspect-square w-full h-auto'}
+                    <img
                         src={getFile()}
-                    />
+                        alt={'image'}/>
                 </Show>
 
             </div>
-            <div>{props.description}</div>
+            <div class={"text-v-text-body"}>{props.description}</div>
         </div>
     )
 }
