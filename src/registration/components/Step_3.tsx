@@ -6,25 +6,55 @@ import TextAreaInput from "../../common_components/TextAreaInput";
 import {TStepProps} from "../../authentication/types";
 import TextInput from "../../common_components/TextInput";
 
-export default function Step_3(props: TStepProps) {
-    const [getEmails, setEmails] = createSignal<Array<Record<string, string>>>([{email_0: ""}])
+function updateObjEmail(
+    list: {
+        id: string,
+        value: string
+    }[],
+    id: string,
+    value: string) {
 
-    createEffect(() => {
-        console.log(getEmails())
+    const updatedListObjEmails = list.map((ObjEmail) => {
+        if (ObjEmail.id !== id) {
+            return ObjEmail
+        }
+        ObjEmail.value = value
+        return ObjEmail
     })
 
+    console.debug(updatedListObjEmails)
+
+    return updatedListObjEmails
+}
+
+export default function Step_3(props: TStepProps) {
+    let timeoutId: NodeJS.Timeout;
+    const [getEmails, setEmails] = createSignal<Array<{
+        id: string,
+        value: string
+    }>>([])
+
     function onButtonClick() {
-        props.onButtonClick({emails: getEmails()})
+        props.onButtonClick({
+            emails: getEmails().map(
+                ({
+                     id,
+                     value
+                 }) => value)
+        })
     }
 
     function addEmailInput() {
         setEmails((prevEmails) => {
             const emailId = `email_${prevEmails.length}`
 
-            return {
+            return [
                 ...prevEmails,
-                [emailId]: ""
-            }
+                {
+                    id   : emailId,
+                    value: ""
+                }
+            ]
         })
     }
 
@@ -34,30 +64,28 @@ export default function Step_3(props: TStepProps) {
             <div class={"flex flex-col items-stretch justify-start gap-2"}>
                 <For each={getEmails()}>
                     {
-                        (item) => {
-                            console.log(item)
-                            return <TextInput
-                                onChange={(email) => {
-                                    const {
-                                              key,
-                                              value
-                                          } = item
+                        (ObjEmail) => {
+                            if (import.meta.env.DEV) {
+                                console.debug("Creating input handler: ", ObjEmail)
+                            }
 
-                                    let timeoutId;
+                            return <TextInput
+                                onChange={(enteredEmail) => {
+                                    const {
+                                              id,
+                                              value
+                                          } = ObjEmail
 
                                     if (timeoutId) {
+                                        console.debug("Clearing timeout: ", timeoutId)
                                         clearTimeout(timeoutId)
                                     }
 
                                     timeoutId = setTimeout(() => {
-                                        setEmails((prevState) => {
-                                            return {
-                                                ...prevState,
-                                                [key]: email
-                                            }
+                                        setEmails((listObjEmails) => {
+                                            return updateObjEmail(listObjEmails, id, enteredEmail)
                                         })
-                                    }, 100)
-
+                                    }, 1000 * 1)
                                 }}
                                 placeholder={'Employee email address'}
                                 inputConfig={{type: 'email'}}/>

@@ -16,7 +16,6 @@ export default function TextInput(props: {
             onChange={(value) => {
                 props.onChange(value)
             }}
-
         >
             <TextField.Input
                 type={props.inputConfig.type}
