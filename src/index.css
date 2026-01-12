@@ -2,42 +2,53 @@
 /*@config "../tailwind.config.js";*/
 
 @theme {
-  /* --- Palette 1: Arctic Professional (Default) --- */
-  --color-v-bg: #f8fafc;
-  --color-v-surface: rgba(255, 255, 255, 0.7);
-  --color-v-accent: #0ea5e9;
-  --color-v-accent-glow: rgba(14, 165, 233, 0.2);
-  --color-v-text-main: #0f172a;
-  --color-v-text-body: #475569;
-  --color-v-matte: #64748b;
+    /* --- Palette 1: Arctic Professional (Default) --- */
+    --color-v-bg: hsl(210, 40%, 98%);
+    --color-v-surface: hsla(0, 0%, 100%, 0.7);
+    --color-v-accent: hsl(199, 89%, 48%);
+    --color-v-accent-glow: hsla(199, 89%, 48%, 0.2);
+    --color-v-text-main: hsl(222, 46%, 11%);
+    --color-v-text-body: hsl(215, 19%, 35%);
+    --color-v-matte: hsl(215, 16%, 47%);
+    --color-v-shadow-hard: hsla(187, 30%, 30%, 0.2);
+    --color-v-shadow-soft: hsla(187, 30%, 50%, 0.1);
+    --color-v-light-soft: hsla(187, 30%, 85%, 0.3);
+    --color-v-light-hard: hsla(187, 30%, 95%, 0.6);
 
-  /* --- Palette 2: Soft Prism (Optional override) --- */
-  /* --color-v-bg: #f1f5f9;
-  --color-v-accent: #8b5cf6; */
+    /* --- Palette 2: Soft Prism (Optional override) --- */
+    /* --color-v-bg: #f1f5f9;
+    --color-v-accent: #8b5cf6; */
+    /* --- Custom "Vantage" Elevation & Shadows --- */
+    --shadow-v-glass: 0 10px 25px rgba(0, 0, 0, 0.03);
+    --shadow-v-skeuo: inset 0 1px 0 rgba(255, 255, 255, 1);
 
-  /* --- Custom "Vantage" Elevation & Shadows --- */
-  --shadow-v-glass: 0 10px 25px rgba(0, 0, 0, 0.03);
-  --shadow-v-skeuo: inset 0 1px 0 rgba(255, 255, 255, 1);
+    --shadow-v-skeuo-outter: 0px 0px 2px 2px var(--color-v-shadow-hard), 0px 0px 8px 4px var(--color-v-shadow-soft);
+    --shadow-v-skeuo-inner: inset 0px 0px 3px 3px var(--color-v-light-soft);
 
-  /* --- Custom Radii --- */
-  --radius-v-card: 0.75rem;
+    /* --- Custom Radii --- */
+    --radius-v-card: 0.75rem;
 }
 
 /* --- Custom Vantage Utilities --- */
 @utility v-glass {
-  background-color: var(--color-v-surface);
-  backdrop-filter: blur(16px);
-  border: 0.5px solid rgba(255, 255, 255, 0.4);
-  box-shadow: var(--shadow-v-glass), var(--shadow-v-skeuo);
+    background-color: var(--color-v-surface);
+    backdrop-filter: blur(16px);
+    border: 0.5px solid rgba(255, 255, 255, 0.4);
+    box-shadow: var(--shadow-v-glass), var(--shadow-v-skeuo);
+}
+
+@utility v-skeuo {
+    border: 0.5px solid hsla(187, 30%, 95%, 1);
+    box-shadow: var(--shadow-v-skeuo-outter), var(--shadow-v-skeuo-inner);
 }
 
 @utility v-hologram {
-  border: 1px solid var(--color-v-accent);
-  box-shadow: 0 0 15px var(--color-v-accent-glow);
-  transition: all 0.3s ease-in-out;
+    border: 1px solid var(--color-v-accent);
+    box-shadow: 0 0 15px var(--color-v-accent-glow);
+    transition: all 0.3s ease-in-out;
 }
 
 @utility v-matte-icon {
-  color: var(--color-v-matte);
-  filter: grayscale(0.2) contrast(0.8);
+    color: var(--color-v-matte);
+    filter: grayscale(0.2) contrast(0.8);
 }
