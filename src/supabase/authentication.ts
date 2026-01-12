@@ -36,7 +36,7 @@ export async function signupWithCredentials(email: string, password: string) {
         if (!response.data.session) {
             throw new Error('[-] Session not found')
         }
-        
+
         const sessionSetResponse = await supabase.auth.setSession(response.data.session)
 
         if (import.meta.env.DEV) {
@@ -48,4 +48,24 @@ export async function signupWithCredentials(email: string, password: string) {
         console.warn(e)
         throw new Error('[-] Could not sign up...')
     }
+}
+
+export async function checkUserSession() {
+    const {
+              data: session,
+              error
+          } = await supabase.auth.getSession()
+
+    return session
+
+}
+
+export async function fetchSupabaseUserProfile() {
+    const supabaseUserResponse = await supabase.auth.getUser()
+
+    if (!supabaseUserResponse.data || !supabaseUserResponse.data.user) {
+        throw new Error('[-] Could not fetch user profile...')
+    }
+
+    return supabaseUserResponse.data.user
 }
