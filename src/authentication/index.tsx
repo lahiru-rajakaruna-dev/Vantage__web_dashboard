@@ -1,11 +1,6 @@
-import {AiOutlineUser} from "solid-icons/ai";
-import {BiLogosGoogle} from "solid-icons/bi";
-import {createSignal} from "solid-js";
-import PasswordInput from "../common_components/PasswordInput";
-import PrimaryButton from "../common_components/PrimaryButton";
-import TextInput from "../common_components/TextInput";
-import {TStepProps} from "./types";
-import {signupWithCredentials, signupWithGoogle} from '../supabase/authentication'
+import {BiLogosGoogle}    from "solid-icons/bi";
+import PrimaryButton      from "../common_components/PrimaryButton";
+import {signupWithGoogle} from '../supabase/authentication'
 
 export default function UserSignup() {
     return (
@@ -27,7 +22,6 @@ export default function UserSignup() {
                         }
 
                         window.location.replace(redirectUrl);
-
                     }}
                     isBusy={false}
                     disabled={false}>
