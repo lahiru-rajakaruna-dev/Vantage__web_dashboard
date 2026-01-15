@@ -1,87 +1,15 @@
-import {User} from "@supabase/supabase-js";
-import {QueryClientProvider} from "@tanstack/solid-query";
-import {
-    Component,
-    createContext,
-    createEffect,
-    createResource,
-    createSignal,
-    onCleanup,
-    onMount,
-    Show,
-    useContext,
-} from 'solid-js';
-import UserSignup from "./authentication";
-import OrganizationRegistration from './registration';
-import {supabase} from "./supabase";
-import {checkUserSession, fetchSupabaseUserProfile} from "./supabase/authentication";
-import {QueryClientInstance} from "./tanstack_query";
-import {api} from "./wretch";
+import {QueryClientProvider}    from "@tanstack/solid-query";
+import {Show,}                  from "solid-js";
+import UserSignup               from "./authentication";
+import {useCNTXAuth}            from "./contexts/cntx_auth";
+import OrganizationRegistration from "./registration";
+import {QueryClientInstance}    from "./tanstack_query";
 
-const CNTXAuth = createContext({
-    isAuthed    : false,
-    isRegistered: false
-})
-
-const Screen: Component = () => {
-    const [getAuthState, setAuthState] = createSignal(false)
-    const [getIsLoading, setIsLoading] = createSignal(true)
-    const [getSupabaseUser, setSupabaseUser] = createSignal<User>()
-
-    onMount(async () => {
-
-        const session = await checkUserSession()
-
-        if (!session) {
-            setAuthState(false)
-        } else {
-            const supabaseUserProfile = await fetchSupabaseUserProfile()
-            setSupabaseUser(supabaseUserProfile)
-            setAuthState(true)
-        }
-
-        supabase.auth.onAuthStateChange((e, session) => {
-            if (!session) {
-                setAuthState(false)
-            } else {
-                setAuthState(true)
-            }
-        })
-
-        setIsLoading(false)
-
-        // return data.subscription.unsubscribe()
-    })
-
-
-    return (
-        <CNTXAuth.Provider value={{
-            isAuthed    : getAuthState(),
-            isRegistered: false
-        }}>
-            <Show
-                when={!getIsLoading()}
-                fallback={
-                    <div class={'absolute inset-0 w-full h-full text-3xl font-bold'}>
-                        <div class={"absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl font-bold"}>
-                            Loading...
-                        </div>
-                    </div>}>
-                <App/>
-            </Show>
-        </CNTXAuth.Provider>
-    )
-
-}
-
-export default Screen;
-
-
-function App() {
+export default function App() {
     const {
               isAuthed,
               isRegistered
-          } = useContext(CNTXAuth)
+          } = useCNTXAuth()
 
     return (
         <QueryClientProvider client={QueryClientInstance}>
