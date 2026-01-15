@@ -1,10 +1,9 @@
-import {BiRegularPlus} from "solid-icons/bi";
-import {BsFire} from "solid-icons/bs";
-import {createEffect, createSignal, For} from "solid-js";
-import PrimaryButton from "../../common_components/PrimaryButton";
-import TextAreaInput from "../../common_components/TextAreaInput";
-import {TStepProps} from "../../authentication/types";
-import TextInput from "../../common_components/TextInput";
+import {BiRegularPlus}     from "solid-icons/bi";
+import {BsFire}            from "solid-icons/bs";
+import {createSignal, For} from "solid-js";
+import {TStepProps}        from "../../authentication/types";
+import PrimaryButton       from "../../common_components/PrimaryButton";
+import TextInput           from "../../common_components/TextInput";
 
 function updateObjEmail(
     list: {
@@ -12,7 +11,8 @@ function updateObjEmail(
         value: string
     }[],
     id: string,
-    value: string) {
+    value: string
+) {
 
     const updatedListObjEmails = list.map((ObjEmail) => {
         if (ObjEmail.id !== id) {
@@ -36,12 +36,13 @@ export default function Step_3(props: TStepProps) {
 
     function onButtonClick() {
         props.onButtonClick({
-            emails: getEmails().map(
-                ({
-                     id,
-                     value
-                 }) => value)
-        })
+                                emails: getEmails()
+                                    .map(
+                                        ({
+                                             id,
+                                             value
+                                         }) => value)
+                            })
     }
 
     function addEmailInput() {
