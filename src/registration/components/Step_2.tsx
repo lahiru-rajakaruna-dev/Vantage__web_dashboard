@@ -4,9 +4,7 @@ import PrimaryButton  from "../../common_components/PrimaryButton";
 import SelectInput    from "../../common_components/SelectInput";
 import {TStepProps}   from "./types";
 
-export default function Step_2(props: TStepProps<{
-    isBusy: boolean
-}>) {
+export default function Step_2(props: TStepProps) {
     const [getJobTitle, setJobTitle] = createSignal("")
 
     function onButtonClick() {
@@ -39,8 +37,8 @@ export default function Step_2(props: TStepProps<{
 
         <PrimaryButton
             onClick={onButtonClick}
-            isBusy={props.isBusy}
-            disabled={props.isBusy}
+            isBusy={props.getIsBusy()}
+            disabled={props.getIsBusy()}
         >
             <PrimaryButton.Label>
                 <div class={""}>

@@ -103,8 +103,8 @@ export default function Step_3(props: TStepProps) {
             </div>
             <PrimaryButton
                 onClick={onButtonClick}
-                isBusy={props.isBusy}
-                disabled={props.isBusy}
+                isBusy={props.getIsBusy()}
+                disabled={props.getIsBusy()}
             >
                 <PrimaryButton.Icon>
                     <BsFire/>

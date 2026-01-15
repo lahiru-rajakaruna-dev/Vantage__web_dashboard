@@ -1,7 +1,7 @@
 export type TStepProps<T = {}> =
     {
         onButtonClick: (data: Record<string, any>) => void,
-        isBusy: boolean,
+        getIsBusy: () => boolean,
         setIsBusy: (isBusy: boolean) => void;
     }
     & T
