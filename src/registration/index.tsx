@@ -1,21 +1,32 @@
-import {useMutation} from "@tanstack/solid-query";
-import {Dynamic} from "solid-js/web";
-import {api} from "../wretch";
-import Step_1 from "./components/Step_1";
-import Step_2 from "./components/Step_2";
-import Step_3 from "./components/Step_3";
-import {Component, createEffect, createSignal, JSX, JSXElement, ValidComponent} from "solid-js";
-import {TStepProps} from "../authentication/types";
+import {useMutation}             from "@tanstack/solid-query";
+import {Component, createSignal} from "solid-js";
+import {Dynamic}                 from "solid-js/web";
+import {TStepProps}              from "../authentication/types";
+import {useCNTXAuth}             from "../contexts/cntx_auth";
+import {api}                     from "../wretch";
+import Step_1                    from "./components/Step_1";
+import Step_3                    from "./components/Step_3";
 
-const steps: Record<number, Component<TStepProps>> = {
-    0: Step_1,
-    1: Step_2,
-    2: Step_3
-}
+const steps: Component<TStepProps>[] = [
+    Step_1,
+    // 1: Step_2,
+    Step_3
+]
 
 export default function OrganizationRegistration() {
-    const [getStep, setStep] = createSignal(0)
-    const [getData, setData] = createSignal<Record<string, any>>({})
+    const {userProfile}          = useCNTXAuth()
+    const [getStep, setStep]     = createSignal(0)
+    const [getData, setData]     = createSignal<{
+        organization_name: string
+        organization_admin_email: string,
+        organization_admin_phone: string,
+        organization_logo_url: string,
+    }>({
+           organization_name       : "",
+           organization_logo_url   : "",
+           organization_admin_email: userProfile()?.email ?? "",
+           organization_admin_phone: "",
+       })
     const [getIsBusy, setIsBusy] = createSignal<boolean>(false)
 
     const {
@@ -30,12 +41,15 @@ export default function OrganizationRegistration() {
                 'organization'
             ],
             mutationFn  : async (data, variables) => {
-                return await api.post({...getData()}, "organization/add").json<{
-                    organization_id: string,
-                    organization_name: string,
-                    organization_email: string,
-                    organization_admin_id: string,
-                }>();
+                return await api.post({
+                                          ...getData()
+                                      }, "/organization/add")
+                                .json<{
+                                    organization_id: string,
+                                    organization_name: string,
+                                    organization_email: string,
+                                    organization_admin_id: string,
+                                }>();
             },
             onMutate    : () => {
                 setIsBusy(true)
@@ -55,17 +69,24 @@ export default function OrganizationRegistration() {
     async function submitOrganizationData() {
         setIsBusy(true)
         try {
-            return new Response(null, {
-                status    : 200,
-                statusText: 'OK'
-            })
+            const {
+                      organization_admin_email,
+                      organization_admin_phone,
+                      organization_logo_url,
+                      organization_name
+                  } = getData()
+
+            if (!organization_name || !organization_admin_email || !organization_admin_phone || !organization_logo_url) {
+                throw new Error('[-] Incomplete registration data')
+            }
+
+            mutate()
         } catch (e) {
             throw new Error('Registration failed...')
         } finally {
             setIsBusy(false)
         }
     }
-
 
     function storeData(data: Record<string, any>) {
         setData((prevData) => {
@@ -83,13 +104,13 @@ export default function OrganizationRegistration() {
             onButtonClick={async (data) => {
                 storeData(data);
 
-                if (getStep() >= Object.keys(steps).length - 1) {
+                if (getStep() >= steps.length - 1) {
                     await submitOrganizationData()
                     return
                 }
 
                 setStep((prevStep) => {
-                    if (prevStep >= Object.keys(steps).length - 1) {
+                    if (prevStep >= steps.length - 1) {
                         return prevStep
                     }
 
