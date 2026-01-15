@@ -7,18 +7,18 @@ import {QueryClientInstance}    from "./tanstack_query";
 
 export default function App() {
     const {
-              isAuthed,
-              isRegistered
+              getIsAuthed,
+              getIsRegistered
           } = useCNTXAuth()
 
     return (
         <QueryClientProvider client={QueryClientInstance}>
             <div class={'w-full h-screen min-h-screen mx-auto bg-gradient-to-b from-v-bg to-v-accent'}>
-                <Show when={!isAuthed}
+                <Show when={getIsAuthed()}
                       fallback={
                           <UserSignup/>
                       }>
-                    <Show when={!isRegistered}>
+                    <Show when={!getIsRegistered()}>
                         <OrganizationRegistration/>
                     </Show>
                 </Show>
