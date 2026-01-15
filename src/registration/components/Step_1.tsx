@@ -1,29 +1,50 @@
-import {BsArrow90degRight, BsArrowRight} from "solid-icons/bs";
-import FileInput from "../../common_components/FileInput";
-import PasswordInput from "../../common_components/PasswordInput";
-import PrimaryButton from "../../common_components/PrimaryButton";
-import TextInput from "../../common_components/TextInput";
-import {TStepProps} from "../../authentication/types";
-import {createSignal} from "solid-js";
+import {BsArrowRight}         from "solid-icons/bs";
+import {createSignal}         from "solid-js";
+import {TStepProps}           from "../../authentication/types";
+import FileInput              from "../../common_components/FileInput";
+import PrimaryButton          from "../../common_components/PrimaryButton";
+import TextInput              from "../../common_components/TextInput";
+import {uploadFileToSupabase} from "../../supabase/storage";
 
 export default function Step_1(props: TStepProps) {
-    const [getOrganizationName, setOrganizationName] = createSignal("")
-    const [getOrganizationEmail, setOrganizationEmail] = createSignal("")
-    const [getOrganizationPassword, setOrganizationPassword] = createSignal("")
-    const [getLogoUrl, setLogoUrl] = createSignal<string>()
+    const [getOrganizationName, setOrganizationName]             = createSignal("")
+    const [getOrganizationAdminPhone, setOrganizationAdminPhone] = createSignal("")
+    const [getLogoUrl, setLogoUrl]                               = createSignal<string>()
 
 
     function onButtonClick() {
+        if (!getOrganizationName() || !getOrganizationAdminPhone) {
+            throw new Error('[-] Please fill all the fields')
+        }
+
         props.onButtonClick({
-            organizationName    : getOrganizationName(),
-            organizationEmail   : getOrganizationEmail(),
-            organizationPassword: getOrganizationPassword(),
-            logoUrl             : getLogoUrl()
-        })
+                                organization_name       : getOrganizationName(),
+                                organization_admin_phone: getOrganizationAdminPhone(),
+                                organization_logo_url   : getLogoUrl()
+                            })
     }
 
-    async function uploadFile(file: string) {
-        return ""
+    async function uploadFile(file: ArrayBuffer, fileType: string) {
+        props.setIsBusy(true)
+        try {
+            const {
+                      data,
+                      error
+                  } = await uploadFileToSupabase(file, fileType, "super_user")
+
+            if (import.meta.env.DEV) {
+                console.debug("Step_1 > File Upload: ", data)
+            }
+
+            if (error) {
+                console.error(error)
+                return
+            }
+
+            return data.path;
+        } finally {
+            props.setIsBusy(false)
+        }
     }
 
     return <div
@@ -31,15 +52,20 @@ export default function Step_1(props: TStepProps) {
         <div class={'flex flex-col items-stretch justify-start gap-4'}>
             <FileInput
                 description={'Upload organization logo'}
-                onFileSelect={async (file) => {
-                    const url = await uploadFile(file)
-                    setLogoUrl(url)
+                onFileSelect={async (fileArrayBuffer, fileType) => {
+                    const supabaseFilePath = await uploadFile(fileArrayBuffer, fileType)
+                    setLogoUrl(supabaseFilePath)
                 }}/>
             <div class={"flex flex-col items-stretch justify-start gap-2"}>
                 <TextInput
                     onChange={setOrganizationName}
                     placeholder={"Organization name"}
                     inputConfig={{type: 'text'}}
+                />
+                <TextInput
+                    onChange={setOrganizationAdminPhone}
+                    placeholder={"Organization phone"}
+                    inputConfig={{type: 'tel'}}
                 />
             </div>
         </div>
