@@ -1,8 +1,8 @@
 import {BsArrowRight} from "solid-icons/bs";
 import {createSignal} from "solid-js";
-import {TStepProps}   from "../../authentication/types";
 import PrimaryButton  from "../../common_components/PrimaryButton";
 import SelectInput    from "../../common_components/SelectInput";
+import {TStepProps}   from "./types";
 
 export default function Step_2(props: TStepProps<{
     isBusy: boolean

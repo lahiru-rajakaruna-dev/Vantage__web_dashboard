@@ -1,10 +1,10 @@
 import {BsArrowRight}         from "solid-icons/bs";
 import {createSignal}         from "solid-js";
-import {TStepProps}           from "../../authentication/types";
 import FileInput              from "../../common_components/FileInput";
 import PrimaryButton          from "../../common_components/PrimaryButton";
 import TextInput              from "../../common_components/TextInput";
 import {uploadFileToSupabase} from "../../supabase/storage";
+import {TStepProps}           from "./types";
 
 export default function Step_1(props: TStepProps) {
     const [getOrganizationName, setOrganizationName]             = createSignal("")

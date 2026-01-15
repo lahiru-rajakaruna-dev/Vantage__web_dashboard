@@ -1,9 +1,9 @@
 import {BiRegularPlus}     from "solid-icons/bi";
 import {BsFire}            from "solid-icons/bs";
 import {createSignal, For} from "solid-js";
-import {TStepProps}        from "../../authentication/types";
 import PrimaryButton       from "../../common_components/PrimaryButton";
 import TextInput           from "../../common_components/TextInput";
+import {TStepProps}        from "./types";
 
 function updateObjEmail(
     list: {

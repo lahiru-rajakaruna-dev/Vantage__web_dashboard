@@ -1,11 +1,11 @@
 import {useMutation}             from "@tanstack/solid-query";
 import {Component, createSignal} from "solid-js";
 import {Dynamic}                 from "solid-js/web";
-import {TStepProps}              from "../authentication/types";
 import {useCNTXAuth}             from "../contexts/cntx_auth";
 import {api}                     from "../wretch";
 import Step_1                    from "./components/Step_1";
 import Step_3                    from "./components/Step_3";
+import {TStepProps}              from "./components/types";
 
 const steps: Component<TStepProps>[] = [
     Step_1,
