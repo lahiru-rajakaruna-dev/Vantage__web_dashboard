@@ -1,19 +1,14 @@
-import {supabase} from "./index";
+import {AuthChangeEvent, Session} from "@supabase/supabase-js";
+import {supabase}                 from "./index";
 
 export async function signupWithGoogle() {
     try {
         const response = await supabase.auth.signInWithOAuth({
-            provider: 'google',
-            options : {
-                redirectTo : "http://localhost:3000",
-                queryParams: {
-                    signedIn: "true"
-                }
-            }
-        })
+                                                                 provider: 'google',
+                                                             })
 
         if (import.meta.env.DEV) {
-            console.debug(response)
+            console.debug("Supabase > Authentication: ", response)
         }
 
         return response.data.url
@@ -22,42 +17,41 @@ export async function signupWithGoogle() {
     }
 }
 
-export async function signupWithCredentials(email: string, password: string) {
-    try {
-        const response = await supabase.auth.signUp({
-            email   : email,
-            password: password,
-        })
-
-        if (import.meta.env.DEV) {
-            console.debug(response)
-        }
-
-        if (!response.data.session) {
-            throw new Error('[-] Session not found')
-        }
-
-        const sessionSetResponse = await supabase.auth.setSession(response.data.session)
-
-        if (import.meta.env.DEV) {
-            console.debug(sessionSetResponse)
-        }
-
-        return response.data.user
-    } catch (e) {
-        console.warn(e)
-        throw new Error('[-] Could not sign up...')
-    }
-}
+// export async function signupWithCredentials(email: string, password: string) {
+//     try {
+//         const response = await supabase.auth.signUp({
+//             email   : email,
+//             password: password,
+//         })
+//
+//         if (import.meta.env.DEV) {
+//             console.debug(response)
+//         }
+//
+//         if (!response.data.session) {
+//             throw new Error('[-] Session not found')
+//         }
+//
+//         const sessionSetResponse = await supabase.auth.setSession(response.data.session)
+//
+//         if (import.meta.env.DEV) {
+//             console.debug(sessionSetResponse)
+//         }
+//
+//         return response.data.user
+//     } catch (e) {
+//         console.warn(e)
+//         throw new Error('[-] Could not sign up...')
+//     }
+// }
 
 export async function checkUserSession() {
     const {
-              data: session,
+              data,
               error
           } = await supabase.auth.getSession()
 
-    return session
-
+    return data.session
 }
 
 export async function fetchSupabaseUserProfile() {
@@ -68,4 +62,8 @@ export async function fetchSupabaseUserProfile() {
     }
 
     return supabaseUserResponse.data.user
+}
+
+export function attachCallbackToAuthStateChange(callback: (event: AuthChangeEvent, session: Session | null) => void) {
+    supabase.auth.onAuthStateChange(callback);
 }
