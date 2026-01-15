@@ -11,7 +11,7 @@ export default function TextAreaInput(props: {
             defaultValue={props.defaultValue ?? ""}
             onChange={(value) => {
                 if (import.meta.env.DEV) {
-                    console.trace(value)
+                    console.debug("[TextAreaInput] ", value)
                 }
 
                 props.onInputChange(value)

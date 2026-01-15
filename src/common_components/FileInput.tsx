@@ -1,9 +1,9 @@
-import {AiOutlinePlus} from "solid-icons/ai";
+import {AiOutlinePlus}      from "solid-icons/ai";
 import {createSignal, Show} from "solid-js";
 
 export default function FileInput(props: {
     description: string,
-    onFileSelect: (file: string) => void
+    onFileSelect: (file: ArrayBuffer, fileType: string) => void
 }) {
     const [getFile, setFile] = createSignal<string>()
 
@@ -19,7 +19,7 @@ export default function FileInput(props: {
                 accept={"image/png"}
                 onChange={(e) => {
                     if (import.meta.env.DEV) {
-                        console.debug(e.currentTarget.files)
+                        console.debug('[FileInput] ', e.currentTarget.files)
                     }
 
                     if (!e.currentTarget || !e.currentTarget.files || e.currentTarget.files.length <= 0) {
@@ -29,9 +29,10 @@ export default function FileInput(props: {
                     const file = e.currentTarget.files[0]
 
 
-                    const fileReader = new FileReader()
+                    const fileReader     = new FileReader()
                     fileReader.onloadend = (event) => {
-                        const result = event.target?.result
+                        const result = event.target?.result as ArrayBuffer
+
                         if (import.meta.env.DEV) {
                             console.debug(result)
                         }
@@ -40,12 +41,11 @@ export default function FileInput(props: {
                             return
                         }
 
-                        setFile(result as string)
-
-                        props.onFileSelect(result as string)
+                        props.onFileSelect(result, file.type)
+                        setFile(URL.createObjectURL(new Blob([result], {type: file.type})))
                     }
 
-                    fileReader.readAsDataURL(file)
+                    fileReader.readAsArrayBuffer(file)
                 }}/>
             <div
                 class={"aspect-square w-24 h-auto flex flex-col items-center justify-center border-2 border-white bg-v-accent/20 text-white text-4xl cursor-pointer"}

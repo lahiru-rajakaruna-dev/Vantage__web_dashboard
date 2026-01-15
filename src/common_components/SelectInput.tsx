@@ -28,7 +28,7 @@ export default function SelectInput(props: {
             }}
             onChange={(value) => {
                 if (import.meta.env.DEV) {
-                    console.trace(value)
+                    console.debug("[SelectInput] ", value)
                 }
 
                 props.onValueSelect(value!)
