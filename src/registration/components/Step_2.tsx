@@ -1,8 +1,8 @@
 import {BsArrowRight} from "solid-icons/bs";
-import PrimaryButton from "../../common_components/PrimaryButton";
-import SelectInput from "../../common_components/SelectInput";
-import {TStepProps} from "../../authentication/types";
 import {createSignal} from "solid-js";
+import {TStepProps}   from "../../authentication/types";
+import PrimaryButton  from "../../common_components/PrimaryButton";
+import SelectInput    from "../../common_components/SelectInput";
 
 export default function Step_2(props: TStepProps<{
     isBusy: boolean
@@ -10,9 +10,13 @@ export default function Step_2(props: TStepProps<{
     const [getJobTitle, setJobTitle] = createSignal("")
 
     function onButtonClick() {
+        if (!getJobTitle()) {
+            throw new Error('[-] Please select your job title')
+        }
+
         props.onButtonClick({
-            jobTitle: getJobTitle()
-        })
+                                jobTitle: getJobTitle()
+                            })
     }
 
     return <div
