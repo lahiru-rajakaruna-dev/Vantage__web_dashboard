@@ -46,9 +46,9 @@ export default function Screen() {
 
     return (
         <CNTXAuth.Provider value={{
-            isAuthed    : getIsAuthenticated,
-            isRegistered: () => false,
-            userProfile : getSupabaseUserProfile,
+            getIsAuthed           : getIsAuthenticated,
+            getIsRegistered       : () => false,
+            getSupabaseUserProfile: getSupabaseUserProfile,
         }}>
             <Show
                 when={!getIsLoading()}

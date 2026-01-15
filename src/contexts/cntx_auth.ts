@@ -2,13 +2,13 @@ import {User}                                from "@supabase/supabase-js";
 import {Accessor, createContext, useContext} from "solid-js";
 
 export const CNTXAuth = createContext<{
-    isAuthed: Accessor<boolean>,
-    isRegistered: Accessor<boolean>,
-    userProfile: Accessor<User | undefined>
+    getIsAuthed: Accessor<boolean>,
+    getIsRegistered: Accessor<boolean>,
+    getSupabaseUserProfile: Accessor<User | undefined>
 }>({
-       isAuthed    : () => false,
-       isRegistered: () => false,
-       userProfile : () =>
+       getIsAuthed           : () => false,
+       getIsRegistered       : () => false,
+       getSupabaseUserProfile: () =>
            undefined
    })
 
