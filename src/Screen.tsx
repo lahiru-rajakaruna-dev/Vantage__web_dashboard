@@ -1,5 +1,5 @@
 import {User}                                                                        from "@supabase/supabase-js";
-import {createSignal, onMount, Show,}                                                from 'solid-js';
+import {createEffect, createSignal, onMount, Show,}                                  from 'solid-js';
 import App                                                                           from "./App";
 import LoadingScreen                                                                 from "./common_components/LoadingScreen";
 import {CNTXAuth}                                                                    from "./contexts/cntx_auth";
@@ -41,6 +41,17 @@ export default function Screen() {
         setIsLoading(false)
 
         // return data.subscription.unsubscribe()
+    })
+
+    createEffect(async () => {
+        const user = getSupabaseUserProfile()
+
+        if (!user) {
+            await window.cookieStore.delete('user_id')
+            return
+        }
+
+        await window.cookieStore.set("user_id", user.id)
     })
 
 
