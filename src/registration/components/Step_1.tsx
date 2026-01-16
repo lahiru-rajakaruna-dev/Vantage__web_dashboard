@@ -71,8 +71,8 @@ export default function Step_1(props: TStepProps) {
         </div>
         <PrimaryButton
             onClick={onButtonClick}
-            isBusy={props.getIsBusy()}
-            disabled={props.getIsBusy()}
+            getIsBusy={props.getIsBusy}
+            getIsDisabled={props.getIsBusy}
         >
             <PrimaryButton.Label>
                 <div class={''}>
