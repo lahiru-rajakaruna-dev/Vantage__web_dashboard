@@ -1,17 +1,19 @@
-import {Button} from '@kobalte/core/button'
-import {VsLoading} from "solid-icons/vs";
+import {Button}                                       from '@kobalte/core/button'
+import {VsLoading}                                    from "solid-icons/vs";
 import {createContext, ParentProps, Show, useContext} from "solid-js";
 
 
-const CNTXButton = createContext({isBusy: false})
+const CNTXButton = createContext<{
+    getIsBusy: () => boolean
+}>({getIsBusy: () => false})
 
 export default function PrimaryButton(props: ParentProps<{
     onClick: () => void
-    isBusy: boolean;
-    disabled: boolean;
+    getIsBusy: () => boolean;
+    getIsDisabled: () => boolean;
 }>) {
     return (
-        <CNTXButton.Provider value={{isBusy: props.isBusy ?? false}}>
+        <CNTXButton.Provider value={{getIsBusy: props.getIsBusy}}>
             <Button
                 class={"w-auto min-w-20 h-fit px-8 py-3 flex flex-row items-center justify-center gap-4 leading-0 font-medium text-white bg-v-accent rounded-md v-skeuo cursor-pointer"}
                 onClick={props.onClick}>
@@ -24,10 +26,10 @@ export default function PrimaryButton(props: ParentProps<{
 }
 
 function Icon(props: ParentProps) {
-    const {isBusy} = useContext(CNTXButton)
+    const {getIsBusy} = useContext(CNTXButton)
 
     return <Show
-        when={!isBusy}
+        when={!getIsBusy()}
         fallback={<VsLoading/>}>
         {
             props.children
@@ -36,11 +38,14 @@ function Icon(props: ParentProps) {
 }
 
 function Label(props: ParentProps) {
-    const {isBusy} = useContext(CNTXButton)
+    const {getIsBusy} = useContext(CNTXButton)
 
-    return <Show when={!isBusy}
-                 fallback={<>In Progress...</>}>{props.children}</Show>
+    return <Show
+        when={!getIsBusy()}
+        fallback={<>In Progress...</>}>
+        {props.children}
+    </Show>
 }
 
-PrimaryButton.Icon = Icon
+PrimaryButton.Icon  = Icon
 PrimaryButton.Label = Label
