@@ -1,6 +1,7 @@
 import {useMutation}             from "@tanstack/solid-query";
 import {Component, createSignal} from "solid-js";
 import {Dynamic}                 from "solid-js/web";
+import {toast}                   from "solid-toast";
 import {useCNTXAuth}             from "../contexts/cntx_auth";
 import {api}                     from "../wretch";
 import Step_1                    from "./components/Step_1";
@@ -60,6 +61,12 @@ export default function OrganizationRegistration() {
                     console.debug(responseData)
                 }
             },
+            onError     : (error, vars, result) => {
+                toast.error(error.message)
+            },
+            onSuccess   : (data, vars, result) => {
+                toast.success("Registration successful...")
+            },
             throwOnError: true,
             retry       : false,
         }
@@ -77,7 +84,8 @@ export default function OrganizationRegistration() {
                   } = getData()
 
             if (!organization_name || !organization_admin_email || !organization_admin_phone || !organization_logo_url) {
-                throw new Error('[-] Incomplete registration data')
+                toast.error('[-] Incomplete registration data...')
+                return
             }
 
             mutate()

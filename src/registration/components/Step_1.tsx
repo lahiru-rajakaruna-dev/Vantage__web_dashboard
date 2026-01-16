@@ -1,5 +1,6 @@
 import {BsArrowRight}         from "solid-icons/bs";
 import {createSignal}         from "solid-js";
+import {toast}                from "solid-toast";
 import FileInput              from "../../common_components/FileInput";
 import PrimaryButton          from "../../common_components/PrimaryButton";
 import TextInput              from "../../common_components/TextInput";
@@ -14,7 +15,8 @@ export default function Step_1(props: TStepProps) {
 
     function onButtonClick() {
         if (!getOrganizationName() || !getOrganizationAdminPhone) {
-            throw new Error('[-] Please fill all the fields')
+            toast.error('Please fill all the fields...')
+            return
         }
 
         props.onButtonClick({
@@ -27,6 +29,7 @@ export default function Step_1(props: TStepProps) {
     async function uploadFile(file: ArrayBuffer, fileType: string) {
         props.setIsBusy(true)
         try {
+            toast.loading("Uploading image...")
             const {
                       data,
                       error
@@ -36,11 +39,15 @@ export default function Step_1(props: TStepProps) {
                 console.debug("Step_1 > File Upload: ", data)
             }
 
+            toast.dismiss()
+
             if (error) {
+                toast.error('Something went wrong. Try again.')
                 console.error(error)
                 return
             }
 
+            toast.success('Logo uploaded...')
             return data.path;
         } finally {
             props.setIsBusy(false)

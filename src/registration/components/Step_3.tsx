@@ -86,7 +86,7 @@ export default function Step_3(props: TStepProps) {
                                         setEmails((listObjEmails) => {
                                             return updateObjEmail(listObjEmails, id, enteredEmail)
                                         })
-                                    }, 1000 * 1)
+                                    }, 1000 * 2)
                                 }}
                                 placeholder={'Employee email address'}
                                 inputConfig={{type: 'email'}}/>
