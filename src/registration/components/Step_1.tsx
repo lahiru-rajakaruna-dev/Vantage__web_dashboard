@@ -28,8 +28,10 @@ export default function Step_1(props: TStepProps) {
 
     async function uploadFile(file: ArrayBuffer, fileType: string) {
         props.setIsBusy(true)
+
         try {
             toast.loading("Uploading image...")
+
             const {
                       data,
                       error
@@ -47,8 +49,11 @@ export default function Step_1(props: TStepProps) {
                 return
             }
 
-            toast.success('Logo uploaded...')
+            toast.success('Image uploaded...')
+
             return data.path;
+        } catch (e) {
+            console.error('[Step_1] Failed to upload image', (e as Error).message)
         } finally {
             props.setIsBusy(false)
         }
