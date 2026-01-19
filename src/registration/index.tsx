@@ -117,6 +117,11 @@ export default function OrganizationRegistration() {
                     return
                 }
 
+                if (getIsBusy()) {
+                    toast('Please wait for a moment...')
+                    return
+                }
+
                 setStep((prevStep) => {
                     if (prevStep >= steps.length - 1) {
                         return prevStep

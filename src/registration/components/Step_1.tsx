@@ -53,7 +53,12 @@ export default function Step_1(props: TStepProps) {
 
             return data.path;
         } catch (e) {
-            console.error('[Step_1] Failed to upload image', (e as Error).message)
+            if (import.meta.env.DEV) {
+                console.debug('[Step_1] Failed to upload image', (e as Error).message)
+            }
+
+            console.error('Image upload failed')
+
         } finally {
             props.setIsBusy(false)
         }
