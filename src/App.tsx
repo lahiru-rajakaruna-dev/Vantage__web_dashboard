@@ -20,8 +20,14 @@ export default function App() {
                       fallback={
                           <UserSignup/>
                       }>
-                    <Show when={!getIsRegistered()}>
-                        <OrganizationRegistration/>
+                    <Show
+                        when={getIsRegistered()}
+                        fallback={
+                            <OrganizationRegistration/>
+                        }>
+                        <div>
+                            DASHBOARD
+                        </div>
                     </Show>
                 </Show>
             </div>
