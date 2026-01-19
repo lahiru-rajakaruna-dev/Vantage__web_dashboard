@@ -1,5 +1,5 @@
 import {Button}                                       from '@kobalte/core/button'
-import {VsLoading}                                    from "solid-icons/vs";
+import {FaSolidGear}                                  from "solid-icons/fa";
 import {createContext, ParentProps, Show, useContext} from "solid-js";
 
 
@@ -30,7 +30,7 @@ function Icon(props: ParentProps) {
 
     return <Show
         when={!getIsBusy()}
-        fallback={<VsLoading/>}>
+        fallback={<FaSolidGear/>}>
         {
             props.children
         }
