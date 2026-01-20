@@ -27,6 +27,17 @@
 
     /* --- Custom Radii --- */
     --radius-v-card: 0.75rem;
+
+    --animate-expand-down-in: expand-in 300ms ease-out forwards;
+
+    @keyframes expand-in {
+        0% {
+            height: 0;
+        }
+        100% {
+            height: 100%
+        }
+    }
 }
 
 /* --- Custom Vantage Utilities --- */
