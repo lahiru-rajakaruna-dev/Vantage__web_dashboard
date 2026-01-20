@@ -4,6 +4,7 @@ import {BsCashStack}                                                         fro
 import {FaSolidHandHoldingDollar, FaSolidPeopleGroup, FaSolidTowerBroadcast} from "solid-icons/fa";
 import {VsSignOut}                                                           from "solid-icons/vs";
 import {For}                                                                 from "solid-js";
+import {signOut}                                                             from "../supabase/authentication";
 
 export default function ApplicationHeader() {
     return (
@@ -89,7 +90,8 @@ function UserProfileButton() {
                         },
                         {
                             label : "Logout",
-                            action: () => {
+                            action: async () => {
+                                await signOut()
                             },
                             icon  : () => <VsSignOut size={16}/>
                         },

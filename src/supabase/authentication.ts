@@ -67,3 +67,7 @@ export async function fetchSupabaseUserProfile() {
 export function attachCallbackToAuthStateChange(callback: (event: AuthChangeEvent, session: Session | null) => void) {
     return supabase.auth.onAuthStateChange(callback);
 }
+
+export async function signOut() {
+    return await supabase.auth.signOut({scope: 'global'})
+}
