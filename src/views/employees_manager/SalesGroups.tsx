@@ -1,7 +1,7 @@
-import { Accordion }           from '@kobalte/core/accordion';
-import { BiSolidArrowToRight } from 'solid-icons/bi';
-import { OcChevrondown }       from 'solid-icons/oc';
-import { For }                 from 'solid-js';
+import { Accordion }            from '@kobalte/core/accordion';
+import { CgChevronDoubleRight } from 'solid-icons/cg';
+import { OcChevrondown }        from 'solid-icons/oc';
+import { For, Match }           from 'solid-js';
 
 
 
@@ -24,7 +24,7 @@ const sales_groups = [
                     'last' : 'Wijesinghe'
                 },
                 'thisMonthsSales': 805,
-                'status'         : 'INACTIVE'
+                'status'         : 'OFF'
             },
             {
                 'name'           : {
@@ -32,7 +32,7 @@ const sales_groups = [
                     'last' : 'Fernando'
                 },
                 'thisMonthsSales': 730,
-                'status'         : 'PENDING'
+                'status'         : 'ON_LEAVE'
             },
             {
                 'name'           : {
@@ -40,7 +40,7 @@ const sales_groups = [
                     'last' : 'Wijesinghe'
                 },
                 'thisMonthsSales': 446,
-                'status'         : 'INACTIVE'
+                'status'         : 'OFF'
             },
             {
                 'name'           : {
@@ -48,7 +48,7 @@ const sales_groups = [
                     'last' : 'Jayasinghe'
                 },
                 'thisMonthsSales': 384,
-                'status'         : 'PENDING'
+                'status'         : 'ON_LEAVE'
             },
             {
                 'name'           : {
@@ -56,7 +56,7 @@ const sales_groups = [
                     'last' : 'Perera'
                 },
                 'thisMonthsSales': 152,
-                'status'         : 'INACTIVE'
+                'status'         : 'OFF'
             },
             {
                 'name'           : {
@@ -64,7 +64,7 @@ const sales_groups = [
                     'last' : 'Perera'
                 },
                 'thisMonthsSales': 497,
-                'status'         : 'PENDING'
+                'status'         : 'ON_LEAVE'
             },
             {
                 'name'           : {
@@ -72,7 +72,7 @@ const sales_groups = [
                     'last' : 'Gunawardena'
                 },
                 'thisMonthsSales': 695,
-                'status'         : 'INACTIVE'
+                'status'         : 'OFF'
             },
             {
                 'name'           : {
@@ -88,7 +88,7 @@ const sales_groups = [
                     'last' : 'Jayasinghe'
                 },
                 'thisMonthsSales': 243,
-                'status'         : 'INACTIVE'
+                'status'         : 'OFF'
             },
             {
                 'name'           : {
@@ -96,7 +96,7 @@ const sales_groups = [
                     'last' : 'Dissanayake'
                 },
                 'thisMonthsSales': 165,
-                'status'         : 'PENDING'
+                'status'         : 'ON_LEAVE'
             },
             {
                 'name'           : {
@@ -104,7 +104,7 @@ const sales_groups = [
                     'last' : 'Rajapaksa'
                 },
                 'thisMonthsSales': 251,
-                'status'         : 'PENDING'
+                'status'         : 'ON_LEAVE'
             },
             {
                 'name'           : {
@@ -112,7 +112,7 @@ const sales_groups = [
                     'last' : 'Liyanage'
                 },
                 'thisMonthsSales': 648,
-                'status'         : 'PENDING'
+                'status'         : 'ON_LEAVE'
             }
         ]
     },
@@ -132,7 +132,7 @@ const sales_groups = [
                     'last' : 'Fernando'
                 },
                 'thisMonthsSales': 806,
-                'status'         : 'PENDING'
+                'status'         : 'ON_LEAVE'
             },
             {
                 'name'           : {
@@ -140,7 +140,7 @@ const sales_groups = [
                     'last' : 'Jayasinghe'
                 },
                 'thisMonthsSales': 525,
-                'status'         : 'INACTIVE'
+                'status'         : 'OFF'
             },
             {
                 'name'           : {
@@ -156,7 +156,7 @@ const sales_groups = [
                     'last' : 'Abeykoon'
                 },
                 'thisMonthsSales': 346,
-                'status'         : 'INACTIVE'
+                'status'         : 'OFF'
             },
             {
                 'name'           : {
@@ -164,7 +164,7 @@ const sales_groups = [
                     'last' : 'Abeykoon'
                 },
                 'thisMonthsSales': 424,
-                'status'         : 'PENDING'
+                'status'         : 'ON_LEAVE'
             },
             {
                 'name'           : {
@@ -172,7 +172,7 @@ const sales_groups = [
                     'last' : 'Rajapaksa'
                 },
                 'thisMonthsSales': 946,
-                'status'         : 'PENDING'
+                'status'         : 'ON_LEAVE'
             },
             {
                 'name'           : {
@@ -180,7 +180,7 @@ const sales_groups = [
                     'last' : 'Gunawardena'
                 },
                 'thisMonthsSales': 921,
-                'status'         : 'PENDING'
+                'status'         : 'ON_LEAVE'
             },
             {
                 'name'           : {
@@ -196,7 +196,7 @@ const sales_groups = [
                     'last' : 'Liyanage'
                 },
                 'thisMonthsSales': 207,
-                'status'         : 'PENDING'
+                'status'         : 'ON_LEAVE'
             },
             {
                 'name'           : {
@@ -204,7 +204,7 @@ const sales_groups = [
                     'last' : 'Jayasinghe'
                 },
                 'thisMonthsSales': 818,
-                'status'         : 'INACTIVE'
+                'status'         : 'OFF'
             },
             {
                 'name'           : {
@@ -212,7 +212,7 @@ const sales_groups = [
                     'last' : 'Liyanage'
                 },
                 'thisMonthsSales': 212,
-                'status'         : 'INACTIVE'
+                'status'         : 'OFF'
             },
             {
                 'name'           : {
@@ -220,7 +220,7 @@ const sales_groups = [
                     'last' : 'Wijesinghe'
                 },
                 'thisMonthsSales': 363,
-                'status'         : 'INACTIVE'
+                'status'         : 'OFF'
             },
             {
                 'name'           : {
@@ -236,7 +236,7 @@ const sales_groups = [
                     'last' : 'Perera'
                 },
                 'thisMonthsSales': 676,
-                'status'         : 'INACTIVE'
+                'status'         : 'OFF'
             }
         ]
     },
@@ -264,7 +264,7 @@ const sales_groups = [
                     'last' : 'Liyanage'
                 },
                 'thisMonthsSales': 702,
-                'status'         : 'PENDING'
+                'status'         : 'ON_LEAVE'
             },
             {
                 'name'           : {
@@ -272,7 +272,7 @@ const sales_groups = [
                     'last' : 'Dissanayake'
                 },
                 'thisMonthsSales': 551,
-                'status'         : 'INACTIVE'
+                'status'         : 'OFF'
             },
             {
                 'name'           : {
@@ -280,7 +280,7 @@ const sales_groups = [
                     'last' : 'Wijesinghe'
                 },
                 'thisMonthsSales': 934,
-                'status'         : 'INACTIVE'
+                'status'         : 'OFF'
             },
             {
                 'name'           : {
@@ -288,7 +288,7 @@ const sales_groups = [
                     'last' : 'Jayasinghe'
                 },
                 'thisMonthsSales': 125,
-                'status'         : 'PENDING'
+                'status'         : 'ON_LEAVE'
             },
             {
                 'name'           : {
@@ -296,7 +296,7 @@ const sales_groups = [
                     'last' : 'Liyanage'
                 },
                 'thisMonthsSales': 498,
-                'status'         : 'PENDING'
+                'status'         : 'ON_LEAVE'
             },
             {
                 'name'           : {
@@ -304,7 +304,7 @@ const sales_groups = [
                     'last' : 'Gunawardena'
                 },
                 'thisMonthsSales': 889,
-                'status'         : 'INACTIVE'
+                'status'         : 'OFF'
             },
             {
                 'name'           : {
@@ -328,7 +328,7 @@ const sales_groups = [
                     'last' : 'Rajapaksa'
                 },
                 'thisMonthsSales': 496,
-                'status'         : 'PENDING'
+                'status'         : 'ON_LEAVE'
             },
             {
                 'name'           : {
@@ -352,7 +352,7 @@ const sales_groups = [
                     'last' : 'Rajapaksa'
                 },
                 'thisMonthsSales': 445,
-                'status'         : 'PENDING'
+                'status'         : 'ON_LEAVE'
             }
         ]
     },
@@ -380,7 +380,7 @@ const sales_groups = [
                     'last' : 'Wijesinghe'
                 },
                 'thisMonthsSales': 631,
-                'status'         : 'INACTIVE'
+                'status'         : 'OFF'
             },
             {
                 'name'           : {
@@ -388,7 +388,7 @@ const sales_groups = [
                     'last' : 'Jayasinghe'
                 },
                 'thisMonthsSales': 824,
-                'status'         : 'INACTIVE'
+                'status'         : 'OFF'
             },
             {
                 'name'           : {
@@ -396,7 +396,7 @@ const sales_groups = [
                     'last' : 'Jayasinghe'
                 },
                 'thisMonthsSales': 241,
-                'status'         : 'PENDING'
+                'status'         : 'ON_LEAVE'
             },
             {
                 'name'           : {
@@ -404,7 +404,7 @@ const sales_groups = [
                     'last' : 'Wijesinghe'
                 },
                 'thisMonthsSales': 547,
-                'status'         : 'PENDING'
+                'status'         : 'ON_LEAVE'
             },
             {
                 'name'           : {
@@ -412,7 +412,7 @@ const sales_groups = [
                     'last' : 'Jayasinghe'
                 },
                 'thisMonthsSales': 738,
-                'status'         : 'INACTIVE'
+                'status'         : 'OFF'
             },
             {
                 'name'           : {
@@ -420,7 +420,7 @@ const sales_groups = [
                     'last' : 'Jayasinghe'
                 },
                 'thisMonthsSales': 516,
-                'status'         : 'PENDING'
+                'status'         : 'ON_LEAVE'
             },
             {
                 'name'           : {
@@ -428,7 +428,7 @@ const sales_groups = [
                     'last' : 'Rajapaksa'
                 },
                 'thisMonthsSales': 268,
-                'status'         : 'INACTIVE'
+                'status'         : 'OFF'
             },
             {
                 'name'           : {
@@ -436,7 +436,7 @@ const sales_groups = [
                     'last' : 'Fernando'
                 },
                 'thisMonthsSales': 499,
-                'status'         : 'INACTIVE'
+                'status'         : 'OFF'
             }
         ]
     },
@@ -456,7 +456,7 @@ const sales_groups = [
                     'last' : 'Jayasinghe'
                 },
                 'thisMonthsSales': 981,
-                'status'         : 'INACTIVE'
+                'status'         : 'OFF'
             },
             {
                 'name'           : {
@@ -464,7 +464,7 @@ const sales_groups = [
                     'last' : 'Fernando'
                 },
                 'thisMonthsSales': 873,
-                'status'         : 'INACTIVE'
+                'status'         : 'OFF'
             },
             {
                 'name'           : {
@@ -472,7 +472,7 @@ const sales_groups = [
                     'last' : 'Jayasinghe'
                 },
                 'thisMonthsSales': 676,
-                'status'         : 'PENDING'
+                'status'         : 'ON_LEAVE'
             },
             {
                 'name'           : {
@@ -506,30 +506,38 @@ export default function SalesGroups() {
                     <Accordion.Header class={ 'w-full h-fit rounded-md bg-teal-300/60 hover:bg-yellow-300/60 hover:translate-z-3 hover:shadow-[0px_2px_4px_2px] shadow-teal-600/10 transition-all ease-in-out duration-300' }>
                         <Accordion.Trigger class={ 'w-full h-fit' }>
                             <div class={ 'w-full h-fit px-3 py-3 flex flex-row items-center justify-between gap-12' }>
-                                <div class={ 'w-2/12 font-semibold text-left text-v-text-body' }>{ item.title }</div>
+                                <div class={ 'w-fit max-w-2/12 font-semibold text-left text-v-text-body' }>
+                                    <pre>{ item.title.padEnd(20, ' ') }</pre>
+                                </div>
                                 <div class={ 'w-full' }/>
-                                <div class={ 'w-3/12 flex flex-row items-center justify-end gap-1' }>
-                                    <div>
+                                <div class={ 'w-fit max-w-3/12 flex flex-row items-center justify-end gap-1' }>
+                                    <pre>
                                         { item.activeMembers.toString()
                                               .padStart(3, ' ') }
-                                    </div>
+                                    </pre>
                                     <div>/</div>
-                                    <div>
+                                    <pre>
                                         { item.totalMembers.toString()
                                               .padStart(3, ' ') }
-                                    </div>
+                                    </pre>
                                 </div>
-                                <div class={ 'w-2/12 text-left whitespace-nowrap' }>
-                                    { `Rs: ${ item.thisMonthsSales.toString() }` }
+                                <div class={ 'w-fit max-w-2/12 text-left whitespace-nowrap' }>
+                                    <pre>
+                                    { `Rs: ${ item.thisMonthsSales.toString()
+                                                  .padStart(6, ' ') }` }
+                                    </pre>
                                 </div>
-                                <div class={ 'w-3/12 flex flex-row items-center justify-end gap-1' }>
-                                    <div>{ item.prospects }</div>
+                                <div class={ 'w-fit max-w-2/12 flex flex-row items-center justify-end gap-1' }>
+                                    <pre>{ item.prospects.toString()
+                                               .padStart(3, ' ') }</pre>
                                     /
-                                    <div>{ item.salesInProgress }</div>
+                                    <pre>{ item.salesInProgress.toString()
+                                               .padStart(3, ' ') }</pre>
                                     /
-                                    <div>{ item.closedDeals }</div>
+                                    <pre>{ item.closedDeals.toString()
+                                               .padStart(3, ' ') }</pre>
                                 </div>
-                                <div class={ 'w-1/12 flex flex-col items-center justify-end' }>
+                                <div class={ 'w-fit max-w-1/12 flex flex-col items-center justify-end' }>
                                     <OcChevrondown/>
                                 </div>
                             </div>
@@ -540,19 +548,25 @@ export default function SalesGroups() {
                         <For each={ item.members }>
                             { (member) => {
                                 return (
-                                        <div class={ 'flex flex-row items-center justify-between gap-2 py-3 border-b-2 border-white/60 last:border-transparent' }>
-                                            <div class={ 'w-1/12 whitespace-nowrap' }>
-                                                { member.name.first + ' ' + member.name.last }
+                                        <div class={ 'flex flex-row items-center justify-between gap-4 py-3 border-b-2 border-white/60 last:border-transparent' }>
+                                            <div class={ 'w-fit max-w-4/12 whitespace-nowrap' }>
+                                                <pre>
+                                                { `${ member.name.first.padEnd(10, ' ') } ${ member.name.last.padEnd(
+                                                        10, ' ') }` }
+                                                </pre>
                                             </div>
                                             <div class={ 'w-full' }/>
-                                            <div class={ 'w-2/12' }>
-                                                { member.thisMonthsSales }
+                                            <div class={ 'w-fit max-w-2/12' }>
+                                                <pre>
+                                                Rs: { member.thisMonthsSales.toString()
+                                                            .padStart(4, ' ') }
+                                                </pre>
                                             </div>
-                                            <div class={ 'w-2/12' }>
-                                                { member.status }
+                                            <div class={ 'w-fit max-w-2/12' }>
+                                                <EmployeeStatusChip status={ member.status }/>
                                             </div>
                                             <button class={ 'w-1/12' }>
-                                                <BiSolidArrowToRight/>
+                                                <CgChevronDoubleRight size={ 18 }/>
                                             </button>
                                         </div>)
                             } }
@@ -563,4 +577,27 @@ export default function SalesGroups() {
             } }
         </For>
     </Accordion>
+}
+
+
+function EmployeeStatusChip(props: {
+    status: 'ACTIVE' | 'ON_LEAVE' | 'OFF'
+}) {
+    return <Switch fallback={ <>UNKNOWN</> }>
+        <Match when={ props.status === 'ACTIVE' }>
+            <pre class={ 'w-28 px-1 pt-1 py-0.5 text-center text-sm font-semibold text-white/60 bg-emerald-300/60 border-2 border-emerald-600/60 rounded-full cursor-default' }>
+                { props.status }
+            </pre>
+        </Match>
+        <Match when={ props.status === 'ON_LEAVE' }>
+            <pre class={ 'w-28 px-1 pt-1 py-0.5 text-center text-sm font-semibold text-white/60 rounded-full bg-gray-300/60 border-2 border-gray-600/60 cursor-default' }>
+                { props.status }
+            </pre>
+        </Match>
+        <Match when={ props.status === 'OFF' }>
+            <pre class={ 'w-28 px-1 pt-1 py-0.5 text-center text-sm font-semibold text-white/60 bg-sky-300/60 border-2 border-sky-600/60 rounded-full cursor-default' }>
+                { props.status }
+            </pre>
+        </Match>
+    </Switch>
 }
