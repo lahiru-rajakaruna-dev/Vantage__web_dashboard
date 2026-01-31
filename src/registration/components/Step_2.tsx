@@ -1,49 +1,50 @@
-import {BsArrowRight} from "solid-icons/bs";
-import {createSignal} from "solid-js";
-import PrimaryButton  from "../../common_components/PrimaryButton";
-import SelectInput    from "../../common_components/SelectInput";
-import {TStepProps}   from "./types";
+import { BsArrowRight } from 'solid-icons/bs';
+import { createSignal } from 'solid-js';
+import PrimaryButton    from '../../common_components/PrimaryButton';
+import SelectInput      from '../../common_components/SelectInput';
+import { TStepProps }   from './types';
+
+
 
 export default function Step_2(props: TStepProps) {
-    const [getJobTitle, setJobTitle] = createSignal("")
-
+    const [ getJobTitle, setJobTitle ] = createSignal('')
+    
+    
     function onButtonClick() {
         if (!getJobTitle()) {
             throw new Error('[-] Please select your job title')
         }
-
+        
         props.onButtonClick({
                                 jobTitle: getJobTitle()
                             })
     }
-
+    
+    
     return <div
-        class={'w-fit min-w-lg h-fit p-8 flex flex-col items-stretch justify-start gap-12 bg-v-bg/80 shadow-[inset_0px_0px_1px_3px] shadow-v-accent-glow backdrop-blur-md rounded-md'}>
-        <div class={"flex flex-col items-stretch justify-start gap-2"}>
+            class={ 'flex flex-col items-stretch justify-start gap-12' }
+    >
+        <div class={ 'flex flex-col items-stretch justify-start gap-2' }>
             <SelectInput
-                options={[
-                    "CEO",
-                    "Manager",
-                    "Quality Examiner",
-                    "Field Officer",
-                    "Instructor"
-                ]}
-                placeholder={"Your Job Title"}
-                onValueSelect={(jobTitle) => {
-                    setJobTitle(jobTitle as string)
-                }}
+                    options={ [
+                        'CEO', 'Manager', 'Quality Examiner', 'Field Officer', 'Instructor'
+                    ] }
+                    placeholder={ 'Your Job Title' }
+                    onValueSelect={ (jobTitle) => {
+                        setJobTitle(jobTitle as string)
+                    } }
             />
         </div>
-
+        
         <PrimaryButton
-            onClick={onButtonClick}
-            getIsBusy={props.getIsBusy}
-            getIsDisabled={props.getIsBusy}
+                onClick={ onButtonClick }
+                getIsBusy={ props.getIsBusy }
+                getIsDisabled={ props.getIsBusy }
         >
             <PrimaryButton.Label>
-                <div class={""}>
+                <pre>
                     Next
-                </div>
+                </pre>
             </PrimaryButton.Label>
             <PrimaryButton.Icon>
                 <BsArrowRight/>

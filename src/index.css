@@ -63,3 +63,10 @@
     color: var(--color-v-matte);
     filter: grayscale(0.2) contrast(0.8);
 }
+
+@utility card {
+    @apply p-4 bg-teal-200/30 border-2 border-teal-400/60 rounded-md shadow-v-skeuo-outter transition-colors duration-300;
+    &:hover {
+        @apply border-yellow-400/60
+    }
+}
