@@ -77,8 +77,8 @@ export interface Employee {
 
 
 export interface CreateEmployeeRequest {
-    employee_nic_number: string;
-    employee_password: string
+    employees_credentials_username: string;
+    employees_credentials_password: string
 }
 
 
