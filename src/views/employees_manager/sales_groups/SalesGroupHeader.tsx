@@ -1,3 +1,4 @@
+import { FaSolidUsers }  from 'solid-icons/fa';
 import { OcChevrondown } from 'solid-icons/oc';
 
 
@@ -19,47 +20,43 @@ export default function SalesGroupHeader(props: {
         </div>
         <div class={ 'w-full' }/>
         <div class={ 'w-fit max-w-3/12 flex flex-row item-center justify-end gap-1' }>
-                    <pre>
+            <div class={ 'w-full h-full flex flex-row items-center justify-start gap-2' }>
+                <FaSolidUsers size={ 18 }/>
+                <div class={ 'flex flex-row items-center justify-start gap-1' }>
+                <pre>
                         { props.sales_group_members.active.toString()
-                               .padStart(3, ' ') }
+                               .padStart(3, '0') }
                     </pre>
-            <div>/</div>
-            <pre>
-                        { props.sales_group_members.total.toString()
-                               .padStart(3, ' ') }
-                    </pre>
-        </div>
-        <div class={ 'w-fit max-w-2/12 text-left whitespace-nowrap' }>
+                    <div>/</div>
                     <pre>
-                    { `Rs: ${ props.sales_group_sales.last_month.toString()
-                                   .padStart(6, ' ') }` }
+                        { props.sales_group_members.total.toString()
+                               .padStart(3, '0') }
                     </pre>
-            <pre>
+                </div>
+            </div>
+        </div>
+        <div class={ 'w-fit max-w-2/12 text-left whitespace-nowrap flex flex-col items-stretch justify-center' }>
+                    <pre class={ 'font-semibold' }>
+                    { `Rs: ${ props.sales_group_sales.last_month.toString()
+                                   .padStart(6, '0') }` }
+                    </pre>
+            <pre class={ 'text-sm font-semibold text-v-text-body' }>
                     { `Rs: ${ props.sales_group_sales.this_month.toString()
-                                   .padStart(6, ' ') }` }
+                                   .padStart(6, '0') }` }
                     </pre>
         </div>
         
-        <div class={ 'w-fit max-w-2/12 flex flex-row item-center justify-end gap-1' }>
-            {/*
-             <pre>{ props.prospects.toString()
-             .padStart(
-             3,
-             ' '
-             ) }</pre>
-             /
-             <pre>{ props.salesInProgress.toString()
-             .padStart(
-             3,
-             ' '
-             ) }</pre>
-             /
-             <pre>{ props.closedDeals.toString()
-             .padStart(
-             3,
-             ' '
-             ) }</pre>
-             */ }
+        <div class={ 'w-fit max-w-2/12 flex flex-col item-start justify-center gap-1 text-start' }>
+             <pre class={ 'text-v-text-main font-semibold' }>
+                 { `This Month(x1K): ${ (525).toString()
+                                             .padStart(
+                                                     3,
+                                                     '0'
+                                             ) }/=` }
+             </pre>
+            <pre class={ 'text-sm font-semibold text-v-text-body' }>
+                { `Last Month(x1K): ${ (500).toString().padStart(3, '0') }/=` }
+            </pre>
         </div>
         
         <div class={ 'w-fit max-w-1/12 flex flex-col item-center justify-end' }>
