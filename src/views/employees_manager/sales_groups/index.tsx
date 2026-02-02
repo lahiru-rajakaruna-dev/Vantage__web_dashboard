@@ -20,7 +20,7 @@ export default function SalesGroups() {
         return {
             queryKey: [ 'sales_groups' ],
             async queryFn() {
-                return await api.sales_group.getSalesGroups()
+                return await api.salesGroupApi.getByOrganization()
             },
         }
     })
