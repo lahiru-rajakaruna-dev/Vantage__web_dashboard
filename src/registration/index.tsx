@@ -36,10 +36,10 @@ export default function OrganizationRegistration() {
     const mutationAddOrganization = useMutation(() => {
         return {
             mutationKey: [
-                'register', 'organization'
+                'organization', 'register'
             ],
             mutationFn : async () => {
-                return await api.organization.addOrganization({ ...getData() })
+                return await api.organizationApi.create({ ...getData() })
             },
             onMutate   : () => {
                 setIsBusy(true)
