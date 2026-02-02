@@ -24,7 +24,7 @@ export default function Dialog_RemoveSalesGroup(props: {
         return {
             queryKey: [ 'sales_groups' ],
             async queryFn() {
-                return await api.sales_group.getSalesGroups()
+                return await api.salesGroupApi.getByOrganization()
             },
             retry: 3,
         }
@@ -39,7 +39,7 @@ export default function Dialog_RemoveSalesGroup(props: {
                     return
                 }
                 
-                return await api.sales_group.removeSalesGroup(getSalesGroupToDelete())
+                return await api.salesGroupApi.delete(getSalesGroupToDelete())
             },
             onMutate : async () => {
                 props.setIsBusy(true)
