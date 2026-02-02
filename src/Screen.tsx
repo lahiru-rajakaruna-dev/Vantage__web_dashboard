@@ -20,7 +20,7 @@ export default function Screen() {
             async queryFn() {
                 try {
                     setIsLoading(true)
-                    const response = await api.organization.isRegistered()
+                    const response = await api.authorizationApi.isRegistered()
                     return response.isRegistered
                 } finally {
                     setIsLoading(false)
