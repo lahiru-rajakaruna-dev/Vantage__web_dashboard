@@ -2,6 +2,7 @@ import { User }                                                                 
 import { useQuery }                                                                    from '@tanstack/solid-query';
 import { createEffect, createSignal, onMount, Show, }                                  from 'solid-js';
 import App                                                                             from './App';
+import UserSignup                                                                      from './authentication';
 import LoadingScreen
                                                                                        from './common_components/LoadingScreen';
 import { CNTXAuth }                                                                    from './contexts/cntx_auth';
@@ -52,6 +53,7 @@ export default function Screen() {
                 setIsAuthenticated(false)
             } else {
                 const supabaseUserProfile = await fetchSupabaseUserProfile()
+                await setUserCookie(supabaseUserProfile.id)
                 setSupabaseUserProfile(supabaseUserProfile)
                 setIsAuthenticated(true)
             }
@@ -73,20 +75,17 @@ export default function Screen() {
             if (import.meta.env.DEV) {
                 console.debug(e)
             }
+        } finally {
+            setIsLoading(false)
         }
         // return data.subscription.unsubscribe()
     })
     
-    createEffect(async () => {
-        const user = getSupabaseUserProfile()
-        
-        if (!user) {
-            await window.cookieStore.delete('user_id')
-            return
-        }
-        
-        await window.cookieStore.set('user_id', user.id)
-    })
+    
+    async function setUserCookie(userId: string) {
+        await window.cookieStore.set('user_id', userId)
+    }
+    
     
     return (<CNTXAuth.Provider
             value={ {
@@ -100,7 +99,12 @@ export default function Screen() {
                 // when={true} // FOR DEVELOPMENT
                 fallback={ <LoadingScreen/> }
         >
-            <App/>
+            <Show
+                    when={ getIsAuthenticated() }
+                    fallback={ <UserSignup/> }
+            >
+                <App/>
+            </Show>
         </Show>
     </CNTXAuth.Provider>)
     
