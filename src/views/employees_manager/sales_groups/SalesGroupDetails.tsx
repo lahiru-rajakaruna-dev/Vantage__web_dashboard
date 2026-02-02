@@ -1,6 +1,6 @@
 import { useQuery }                            from '@tanstack/solid-query';
 import { CgChevronDoubleRight }                from 'solid-icons/cg';
-import { createEffect, For, Show }             from 'solid-js';
+import { For, Show }                           from 'solid-js';
 import EmployeeStatusChip, { EEmployeeStatus } from '../../../common_components/EmployeeStatusChip';
 import api                                     from '../../../wretch/api';
 
@@ -11,19 +11,15 @@ export default function SalesGroupDetails(props: {
 }) {
     const querySalesGroupDetails = useQuery(() => {
         return {
-            queryKey: [ 'sales_group_details', props.salesGroupId ],
+            queryKey: [ 'sales_group', 'details', props.salesGroupId ],
             async queryFn() {
                 console.log('Running Sales Group Data Query')
-                return await api.sales_group.getSalesGroupDetails(props.salesGroupId)
+                return await api.salesGroupApi.getProfile(props.salesGroupId)
             },
             retry  : 3,
             enabled: props.salesGroupId ? true : false,
         }
     })
-    
-    createEffect(() => {
-        console.debug(querySalesGroupDetails.data)
-    });
     
     return <Show
             when={ querySalesGroupDetails.data }
