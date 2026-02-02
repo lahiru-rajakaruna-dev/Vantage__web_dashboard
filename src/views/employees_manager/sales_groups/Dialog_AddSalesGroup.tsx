@@ -29,10 +29,10 @@ export default function Dialog_AddSalesGroup(props: {
                 salesGroupName: string,
                 salesGroupTerritory: string
             }) {
-                return await api.sales_group.addSalesGroup({
-                                                               sales_group_name     : data.salesGroupName,
-                                                               sales_group_territory: data.salesGroupTerritory
-                                                           })
+                return await api.salesGroupApi.create({
+                                                          sales_group_name     : data.salesGroupName,
+                                                          sales_group_territory: data.salesGroupTerritory
+                                                      })
             },
             onMutate : async () => {
                 props.setIsBusy(true)
