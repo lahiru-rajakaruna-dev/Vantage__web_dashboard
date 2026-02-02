@@ -1,31 +1,35 @@
-import {TextField} from "@kobalte/core/text-field";
-import {JSX} from "solid-js";
+import { TextField } from '@kobalte/core/text-field';
+import { JSX }       from 'solid-js';
+
+
 
 export default function TextInput(props: {
     onChange: (value: string) => void
-    placeholder: string
-    description?: string,
+    placeholder?: string
+    value: string,
+    label?: string,
     dataDataValidationFunction?: (value: string) => 'valid' | 'invalid'
     errorMessage?: string
     inputConfig: Pick<JSX.InputHTMLAttributes<HTMLInputElement>, 'type'>
 }) {
-
+    
     return (
-        <TextField
-            class={'w-full h-fit px-4 py-2 rounded-md bg-v-bg shadow-sm text-sm font-normal'}
-            onChange={(value) => {
-                props.onChange(value)
-            }}
-        >
-            <TextField.Input
-                type={props.inputConfig.type}
-                class={'w-full h-fit outline-0'}
-                placeholder={props.placeholder}/>
-            {
-                props.description ??
-                <TextField.Description>{props.description}</TextField.Description>
-            }
-            <TextField.ErrorMessage>{props.errorMessage ?? "Invalid data..."}</TextField.ErrorMessage>
-        </TextField>
+            <TextField
+                    class={ 'flex flex-col items-stretch justify-start gap-1' }
+                    onChange={ (value) => {
+                        props.onChange(value)
+                    } }
+            >
+                {
+                    props.label ? <pre class={ 'text-sm text-v-text-body' }>{ props.label }</pre> : <></>
+                }
+                <TextField.Input
+                        type={ props.inputConfig.type }
+                        class={ 'w-full h-fit px-4 py-2 border-2 border-teal-400/60 rounded-md bg-teal-200/30 text-sm font-semibold outline-0 backdrop-blur-xs shadow-inner' }
+                        placeholder={ props.placeholder }
+                        value={ props.value }
+                />
+                <TextField.ErrorMessage>{ props.errorMessage ?? 'Invalid data...' }</TextField.ErrorMessage>
+            </TextField>
     )
 }
