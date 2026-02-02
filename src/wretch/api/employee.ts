@@ -48,7 +48,7 @@ export const employeeApi = {
     
     // Get all employees by organization
     getByOrganization: async () => {
-        return wretchInstance.get('/employee/view/organization').json<Employee[]>();
+        return wretchInstance.get('/employee/view').json<Employee[]>();
     },
     
     // Get employees by sales group
